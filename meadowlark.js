@@ -4,6 +4,7 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { getFortune } from './lib/fortune.js'
+import { home, about, notFound, serverError } from './lib/handlers.js'
 
 const app = express()
 
@@ -19,22 +20,8 @@ app.listen(port, () => console.log(
   `press Ctrl-C to terminate.`))
 
 app.use(express.static(fileURLToPath(import.meta.url+'/../public')))
-  
-app.get('/', (req, res) => res.render('home'))
-
-app.get('/about', (req, res) => {
-  res.render('about', { fortune: getFortune() })
-})
-
-// custom 404 page
-app.use((req, res) => {
-  res.status(404)
-  res.render('404')
-})
-
-// custom 500 page
-app.use((err, req, res, next) => {
-  res.status(500)
-  res.render('500')
-})
+app.get('/', home)
+app.get('/about', about)
+app.use(notFound)
+app.use(serverError)
 

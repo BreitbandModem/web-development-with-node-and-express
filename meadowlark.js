@@ -3,6 +3,8 @@ import { engine } from 'express-handlebars'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
+import { getFortune } from './lib/fortune.js'
+
 const app = express()
 
 const port = process.env.PORT || 3000
@@ -20,14 +22,8 @@ app.use(express.static(fileURLToPath(import.meta.url+'/../public')))
   
 app.get('/', (req, res) => res.render('home'))
 
-const fortunes = [
-  "123",
-  "abc",
-  "xyz",
-]
 app.get('/about', (req, res) => {
-  const randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)]
-  res.render('about', { fortune: randomFortune })
+  res.render('about', { fortune: getFortune() })
 })
 
 // custom 404 page

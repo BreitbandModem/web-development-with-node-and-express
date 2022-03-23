@@ -1,9 +1,7 @@
-import express from 'express'
+import { express } from 'express'
 import { engine } from 'express-handlebars'
-import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import { getFortune } from './lib/fortune.js'
 import { home, about, notFound, serverError } from './lib/handlers.js'
 
 const app = express()

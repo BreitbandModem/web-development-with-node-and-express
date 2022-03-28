@@ -1,7 +1,7 @@
 import { getPortPromise } from 'portfinder'
 import puppeteer from 'puppeteer'
 
-import { app } from '../meadowlark.js'
+import app from '../meadowlark.js'
 
 let server = null
 let port = null
